@@ -4,8 +4,50 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Инструмент для Креативности</title>
-        <link rel="stylesheet" href="./tool.js" />
+        <link rel="stylesheet" href="./script/tool.js" />
         <link rel="stylesheet" href="./style.css" />
+        <!-- Yandex.Metrika counter -->
+        <script type="text/javascript">
+            ;(function (m, e, t, r, i, k, a) {
+                m[i] =
+                    m[i] ||
+                    function () {
+                        ;(m[i].a = m[i].a || []).push(arguments)
+                    }
+                m[i].l = 1 * new Date()
+                for (var j = 0; j < document.scripts.length; j++) {
+                    if (document.scripts[j].src === r) {
+                        return
+                    }
+                }
+                ;(k = e.createElement(t)),
+                    (a = e.getElementsByTagName(t)[0]),
+                    (k.async = 1),
+                    (k.src = r),
+                    a.parentNode.insertBefore(k, a)
+            })(
+                window,
+                document,
+                'script',
+                'https://mc.yandex.ru/metrika/tag.js',
+                'ym'
+            )
+
+            ym(99375881, 'init', {
+                clickmap: true,
+                trackLinks: true,
+                accurateTrackBounce: true,
+            })
+        </script>
+        <noscript
+            ><div>
+                <img
+                    src="https://mc.yandex.ru/watch/99375881"
+                    style="position: absolute; left: -9999px"
+                    alt=""
+                /></div
+        ></noscript>
+        <!-- /Yandex.Metrika counter -->
     </head>
     <body>
         <div class="container">
@@ -37,188 +79,5 @@
                 <button class="button" id="add">Добавить</button>
             </div>
         </div>
-
-        <script>
-            // Начальные списки слов на русском языке
-            const adjectives = [
-                'красивый',
-                'быстрый',
-                'яркий',
-                'загадочный',
-                'сияющий',
-                'мягкий',
-                'громкий',
-                'весёлый',
-                'сильный',
-                'честный',
-                'скромный',
-                'умный',
-                'забавный',
-                'милый',
-                'дружелюбный',
-                'ленивый',
-                'трудолюбивый',
-                'грустный',
-                'смешной',
-                'добрый',
-                'нежный',
-                'дерзкий',
-                'пушистый',
-                'жаркий',
-                'холодный',
-                'прохладный',
-                'теплый',
-                'шумный',
-                'тихий',
-                'сладкий',
-                'горький',
-                'солёный',
-                'светлый',
-                'тёмный',
-                'яростный',
-                'спокойный',
-                'радостный',
-                'удивительный',
-                'захватывающий',
-                'творческий',
-                'обычный',
-                'уникальный',
-                'необычный',
-                'легкий',
-                'тяжелый',
-                'живой',
-                'искренний',
-                'отважный',
-                'неловкий',
-                'приятный',
-            ]
-
-            const nouns = [
-                'дракон',
-                'замок',
-                'цветок',
-                'робот',
-                'корабль',
-                'мост',
-                'дерево',
-                'луна',
-                'солнце',
-                'звезда',
-                'гитара',
-                'машина',
-                'собака',
-                'кот',
-                'птица',
-                'лодка',
-                'река',
-                'гора',
-                'дом',
-                'город',
-                'книга',
-                'компьютер',
-                'мяч',
-                'чайник',
-                'часы',
-                'яблоко',
-                'картина',
-                'зонт',
-                'стул',
-                'шляпа',
-                'телефон',
-                'планета',
-                'торт',
-                'паровоз',
-                'огонь',
-                'реактор',
-                'экран',
-                'камень',
-                'меч',
-                'доска',
-                'клавиатура',
-                'календарь',
-                'шарф',
-                'карта',
-                'медведь',
-                'облако',
-                'зеркало',
-                'ворона',
-                'ваза',
-                'танк',
-            ]
-
-            // DOM элементы
-            const output = document.getElementById('output')
-            const generateButton = document.getElementById('generate')
-            const addButton = document.getElementById('add')
-            const adjectiveTextarea = document.getElementById('adjective')
-            const nounTextarea = document.getElementById('noun')
-
-            // Функция согласования прилагательных и существительных
-            function agreeAdjectiveWithNoun(adjective, noun) {
-                const feminineNouns = [
-                    'лодка',
-                    'река',
-                    'гора',
-                    'звезда',
-                    'гитара',
-                    'собака',
-                    'картина',
-                    'шляпа',
-                    'планета',
-                    'ваза',
-                    'карта',
-                ]
-                const neuterNouns = [
-                    'яблоко',
-                    'солнце',
-                    'дерево',
-                    'место',
-                    'зеркало',
-                    'облако',
-                    'камень',
-                    'молоко',
-                ]
-
-                if (feminineNouns.includes(noun)) {
-                    return adjective.replace(/ый|ий$/, 'ая')
-                } else if (neuterNouns.includes(noun)) {
-                    return adjective.replace(/ый|ий$/, 'ое')
-                }
-                return adjective
-            }
-
-            // Генерация случайных слов
-            generateButton.addEventListener('click', () => {
-                const randomAdjective =
-                    adjectives[Math.floor(Math.random() * adjectives.length)]
-                const randomNoun =
-                    nouns[Math.floor(Math.random() * nouns.length)]
-                const agreedAdjective = agreeAdjectiveWithNoun(
-                    randomAdjective,
-                    randomNoun
-                )
-                output.textContent = `${agreedAdjective} ${randomNoun}`
-            })
-
-            // Добавление слов из текстового поля
-            addButton.addEventListener('click', () => {
-                const newAdjectives = adjectiveTextarea.value
-                    .split(',')
-                    .map((word) => word.trim())
-                    .filter((word) => word)
-                const newNouns = nounTextarea.value
-                    .split(',')
-                    .map((word) => word.trim())
-                    .filter((word) => word)
-
-                adjectives.push(...newAdjectives)
-                nouns.push(...newNouns)
-
-                adjectiveTextarea.value = ''
-                nounTextarea.value = ''
-
-                alert('Слова успешно добавлены!')
-            })
-        </script>
     </body>
 </html>
