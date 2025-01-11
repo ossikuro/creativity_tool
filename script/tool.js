@@ -50,6 +50,10 @@ const adjectives = [
     'отважный',
     'неловкий',
     'приятный',
+    'упрямый',
+    'аккустический',
+    'несгибаемый',
+    'вражеский',
 ]
 
 const nouns = [
@@ -59,32 +63,16 @@ const nouns = [
     'робот',
     'корабль',
     'мост',
-    'дерево',
-    'луна',
-    'солнце',
-    'звезда',
-    'гитара',
-    'машина',
-    'собака',
     'кот',
-    'птица',
-    'лодка',
-    'река',
-    'гора',
     'дом',
     'город',
-    'книга',
     'компьютер',
     'мяч',
     'чайник',
     'часы',
-    'яблоко',
-    'картина',
     'зонт',
     'стул',
-    'шляпа',
     'телефон',
-    'планета',
     'торт',
     'паровоз',
     'огонь',
@@ -92,16 +80,9 @@ const nouns = [
     'экран',
     'камень',
     'меч',
-    'доска',
-    'клавиатура',
     'календарь',
     'шарф',
-    'карта',
     'медведь',
-    'облако',
-    'зеркало',
-    'ворона',
-    'ваза',
     'танк',
 ]
 
@@ -126,6 +107,16 @@ function agreeAdjectiveWithNoun(adjective, noun) {
         'планета',
         'ваза',
         'карта',
+        'ваза',
+        'ворона',
+        'карта',
+        'клавиатура',
+        'доска',
+        'книга',
+        'птица',
+        'гитара',
+        'машина',
+        'луна',
     ]
     const neuterNouns = [
         'яблоко',
@@ -174,3 +165,225 @@ addButton.addEventListener('click', () => {
 
     alert('Слова успешно добавлены!')
 })
+
+const { Illustration, Group, Anchor, Rect, TAU, Ellipse } = Zdog
+const element = document.querySelector('canvas')
+const illustration = new Illustration({
+    element,
+    dragRotate: true,
+})
+
+// anchor point used for the rotation
+const dice = new Anchor({
+    addTo: illustration,
+})
+
+// group describing the faces through rounded rectangles
+const faces = new Group({
+    addTo: dice,
+})
+// due to the considerable stroke, it is possible to fake the dice using four faces only
+const face = new Rect({
+    addTo: faces,
+    stroke: 10,
+    width: 10,
+    height: 10,
+    color: '#fff',
+    translate: {
+        z: -5,
+    },
+})
+
+// rotate the faces around the center
+face.copy({
+    rotate: {
+        x: TAU / 4,
+    },
+    translate: {
+        y: 5,
+    },
+})
+
+face.copy({
+    rotate: {
+        x: TAU / 4,
+    },
+    translate: {
+        y: -5,
+    },
+})
+
+face.copy({
+    translate: {
+        z: 5,
+    },
+})
+
+// include the dots repeating as many shapes/groups as possible
+// ! when copying an element be sure to reset the rotation/translation of the copied shape
+const one = new Ellipse({
+    addTo: dice,
+    diameter: 3,
+    stroke: false,
+    fill: true,
+    color: '#000',
+    translate: {
+        z: 10,
+    },
+})
+
+const two = new Group({
+    addTo: dice,
+    rotate: {
+        x: TAU / 4,
+    },
+    translate: {
+        y: 10,
+    },
+})
+
+one.copy({
+    addTo: two,
+    translate: {
+        y: 4,
+    },
+})
+
+one.copy({
+    addTo: two,
+    translate: {
+        y: -4,
+    },
+})
+
+const three = new Group({
+    addTo: dice,
+    rotate: {
+        y: TAU / 4,
+    },
+    translate: {
+        x: 10,
+    },
+})
+
+one.copy({
+    addTo: three,
+    translate: {
+        z: 0,
+    },
+})
+
+one.copy({
+    addTo: three,
+    translate: {
+        x: 4,
+        y: -4,
+        z: 0,
+    },
+})
+
+one.copy({
+    addTo: three,
+    translate: {
+        x: -4,
+        y: 4,
+        z: 0,
+    },
+})
+
+const four = new Group({
+    addTo: dice,
+    rotate: {
+        y: TAU / 4,
+    },
+    translate: {
+        x: -10,
+    },
+})
+
+two.copyGraph({
+    addTo: four,
+    rotate: {
+        x: 0,
+    },
+    translate: {
+        x: 4,
+        y: 0,
+    },
+})
+
+two.copyGraph({
+    addTo: four,
+    rotate: {
+        x: 0,
+    },
+    translate: {
+        x: -4,
+        y: 0,
+    },
+})
+
+const five = new Group({
+    addTo: dice,
+    rotate: {
+        x: TAU / 4,
+    },
+    translate: {
+        y: -10,
+    },
+})
+
+four.copyGraph({
+    addTo: five,
+    rotate: {
+        y: 0,
+    },
+    translate: {
+        x: 0,
+    },
+})
+
+one.copy({
+    addTo: five,
+    translate: {
+        z: 0,
+    },
+})
+
+const six = new Group({
+    addTo: dice,
+    translate: {
+        z: -10,
+    },
+})
+
+two.copyGraph({
+    addTo: six,
+    rotate: {
+        x: 0,
+        z: TAU / 4,
+    },
+    translate: {
+        x: 0,
+        y: 0,
+    },
+})
+
+four.copyGraph({
+    addTo: six,
+    rotate: {
+        y: 0,
+    },
+    translate: {
+        x: 0,
+    },
+})
+
+// animate the dice to endlessly rotate around its center
+function animate() {
+    illustration.updateRenderGraph()
+    dice.rotate.x += 0.01
+    dice.rotate.y -= 0.01
+    requestAnimationFrame(animate)
+}
+animate()

@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+    font-size: 16px;
+    font-family: Inter;
+    overflow: hidden;
+}
+
+/* фон и оболочка */
+
+#bgVideo {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -100;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 88rem;
+    min-height: 100vh;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 1rem;
+    color: white;
+}
+
+/* контент */
+
+.instruction {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 200;
+    text-align: center;
+}
+
+.blockGenerate {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    height: 100%;
+    gap: 2rem;
+}
+
+.output {
+    font-size: 6rem;
+    line-height: 7rem;
+    font-weight: 200;
+    letter-spacing: 0.25rem;
+    text-align: center;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1rem 0.75rem 1.5rem;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 200;
+    color: white;
+    background-color: transparent;
+    border: 1px solid white;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.button:hover {
+    background-color: #ffffff0b;
+}
+
+.dice {
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: transparent;
+    display: inline-block;
+}
+
+.blockAdd {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 400;
+    color: white;
+}
+
+.inputContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    min-height: 12rem;
+    gap: 1rem;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 1.5rem;
+    backdrop-filter: blur(2rem);
+}
+
+.inputColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.inputAdd {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 1rem;
+    background-color: #f7f9fc;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 200;
+    color: #c1c1c1;
+    resize: vertical;
+    transition: border-color 0.3s ease;
+}
+
+.inputAdd::-webkit-resizer {
+    display: none;
+}
+
+.inputAdd:focus {
+    border-color: #4a90e2;
+    outline: none;
+    color: #000;
+}
+
+.inputLabel {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 200;
+    color: white;
+}
+
+.buttonAdd {
+    margin-top: 2rem;
+    padding: 0.5rem 1rem;
+    height: auto;
+}
+
+@media (min-aspect-ratio: 16/9) {
+    video {
+        width: 100%;
+        height: auto;
+    }
+}
+@media (max-aspect-ratio: 16/9) {
+    video {
+        width: auto;
+        height: 100%;
+    }
+}
+
+@media (max-width: 840px) {
+    .output {
+        font-size: 4rem;
+        line-height: 4.5rem;
+    }
+
+    .button {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+    }
+
+    .blockAdd {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+        gap: 0.5rem;
+    }
+
+    .inputContainer {
+        flex-direction: column;
+        min-height: auto;
+    }
+
+    .inputColumn {
+        gap: 0.25rem;
+    }
+
+    .inputLabel {
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+    }
+
+    .inputAdd {
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        border-radius: 0.75rem;
+    }
+
+    .buttonAdd {
+        margin-top: 0.5rem;
+    }
+}

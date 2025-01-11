@@ -4,8 +4,9 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Инструмент для Креативности</title>
-        <link rel="stylesheet" href="./script/tool.js" />
-        <link rel="stylesheet" href="./style.css" />
+        <link rel="stylesheet" href="./style/reset.css" />
+        <link rel="stylesheet" href="./style/normalize.css" />
+        <link rel="stylesheet" href="./style/style.css" />
         <!-- Yandex.Metrika counter -->
         <script type="text/javascript">
             ;(function (m, e, t, r, i, k, a) {
@@ -50,34 +51,57 @@
         <!-- /Yandex.Metrika counter -->
     </head>
     <body>
+        <!-- Фоновое видео -->
+        <video autoplay muted loop id="bgVideo">
+            <source
+                src="./assets/main-gradient.8f40167c.mp4"
+                type="video/mp4"
+            />
+        </video>
+
         <div class="container">
+            <div class="instruction">
+                Смешай два случайных слова и придумай, как это может выглядеть
+            </div>
+
             <!-- Блок генерации слов -->
-            <div class="block">
+            <div class="blockGenerate">
                 <div class="output" id="output">Сгенерируйте слова</div>
-                <button class="button" id="generate">Сгенерировать</button>
+                <button class="button" id="generate">
+                    Сгенерировать
+                    <canvas class="dice" width="28" height="28"></canvas>
+                </button>
             </div>
 
             <!-- Блок добавления слов -->
-            <div class="block">
-                <h2>Добавить свои слова</h2>
-                <div class="input-container">
-                    <label for="adjective" class="input-label"
-                        >Добавьте прилагательные через запятую:</label
-                    >
-                    <textarea
-                        id="adjective"
-                        placeholder="Например: быстрый, красивый, умный"
-                    ></textarea>
-                    <label for="noun" class="input-label"
-                        >Добавьте существительные через запятую:</label
-                    >
-                    <textarea
-                        id="noun"
-                        placeholder="Например: машина, дом, книга"
-                    ></textarea>
+            <div class="blockAdd">
+                Добавить свои слова
+                <div class="inputContainer">
+                    <div class="inputColumn">
+                        <label for="adjective" class="inputLabel"
+                            >Добавьте прилагательные через запятую:
+                        </label>
+                        <textarea
+                            class="inputAdd"
+                            id="adjective"
+                            placeholder="Например: быстрый, красивый, умный"
+                        ></textarea>
+                    </div>
+                    <div class="inputColumn">
+                        <label for="noun" class="inputLabel"
+                            >Добавьте существительные через запятую:</label
+                        >
+                        <textarea
+                            class="inputAdd"
+                            id="noun"
+                            placeholder="Например: машина, дом, книга"
+                        ></textarea>
+                    </div>
+                    <button class="button buttonAdd" id="add">+</button>
                 </div>
-                <button class="button" id="add">Добавить</button>
             </div>
         </div>
+        <script src="https://unpkg.com/zdog@1/dist/zdog.dist.min.js"></script>
+        <script type="module" src="./script/tool.js"></script>
     </body>
 </html>
